@@ -12,8 +12,18 @@ namespace Extractor
         static List<String> ExtractSingleFile(string filename, Options opts)
         {
             string data = File.ReadAllText(filename);
-            var extractor = new Extractor(data, opts);
+            string sep = "\t";
+            string[] splitContent = data.Split(sep.ToCharArray());
+            string code = splitContent[3];
+            string label = splitContent[2];
+            var extractor = new Extractor(code, opts);
             List<String> result = extractor.Extract();
+            string sep1 = " ";
+            string[] label_words = label.Split(sep1.ToCharArray());
+            string code_summary = String.Join("|", label_words);
+            for (int i = 0; i < result.Count(); i++){
+                result[i] = (code_summary + " " + result[i]);
+            }
 
             return result;
         }

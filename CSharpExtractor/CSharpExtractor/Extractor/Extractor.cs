@@ -216,7 +216,7 @@ namespace Extractor
                         contexts.Add(batch + "," + "COMMENT" + "," + batch);
                     }
                 }
-                results.Add(String.Join("|", subtokensMethodName) + " " + String.Join(" ", contexts));  
+                results.Add(String.Join(" ", contexts));  
             }
             return results;
         }

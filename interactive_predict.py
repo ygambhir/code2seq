@@ -42,6 +42,7 @@ class InteractivePredictor:
                 print('Original name:\t' + method_prediction.original_name)
                 if self.config.BEAM_WIDTH == 0:
                     print('Predicted:\t%s' % [step.prediction for step in method_prediction.predictions])
+                    
                     for timestep, single_timestep_prediction in enumerate(method_prediction.predictions):
                         print('Attention:')
                         print('TIMESTEP: %d\t: %s' % (timestep, single_timestep_prediction.prediction))

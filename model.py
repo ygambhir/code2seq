@@ -674,6 +674,8 @@ class Model:
             self.num_training_examples = pickle.load(file)
             self.epochs_trained = pickle.load(file)
             saved_config = pickle.load(file)
+            with open('config.dict', 'wb') as f:
+                pickle.dump(saved_config, f)
             self.config.take_model_hyperparams_from(saved_config)
             print('Done loading dictionaries')
 

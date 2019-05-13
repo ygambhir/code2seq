@@ -34,7 +34,7 @@ def ExtractFeaturesForDir(args, dir, prefix):
     # os.system(command)
     kill = lambda process: process.kill()
     sleeper = subprocess.Popen(command, stderr=subprocess.PIPE)
-    timer = Timer(600000, kill, [sleeper])
+    timer = Timer(600000000, kill, [sleeper])
 
     try:
         timer.start()
@@ -49,6 +49,8 @@ def ExtractFeaturesForDir(args, dir, prefix):
         print(sys.stderr, 'dir: ' + str(dir) + ' was not completed in time')
         failed = True
         subdirs = get_immediate_subdirectories(dir)
+        print('subdirs', subdirs)
+        print(sleeper.returncode)
         for subdir in subdirs:
             ExtractFeaturesForDir(args, subdir, prefix + dir.split('/')[-1] + '_')
     if failed:
@@ -89,4 +91,6 @@ if __name__ == '__main__':
         to_extract = subdirs
         if len(subdirs) == 0:
             to_extract = [args.dir.rstrip('/')]
+        print('args', args)
+        print('to_extract', to_extract)
         ExtractFeaturesForDirsList(args, to_extract)
